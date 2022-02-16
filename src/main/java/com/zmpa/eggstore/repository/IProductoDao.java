@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.zmpa.eggstore.model.Producto;
 
 @Repository
-public interface ProductoDao extends JpaRepository<Producto, Integer>{
+public interface IProductoDao extends JpaRepository<Producto, Integer>{
 
 }
