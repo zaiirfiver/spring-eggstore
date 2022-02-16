@@ -44,7 +44,7 @@ public class OrdenServiceImpl implements IOrdenService{
 		}
 		
 		if (numero<10) {
-			numeroConcatenado="000000000"+String.valueOf(numero);
+			numeroConcatenado="000000000"+String.valueOf(numero); 		//concatena el numero de pedidos desde 10 hasta 1000
 		}else if (numero<100) {
 			numeroConcatenado="00000000"+String.valueOf(numero);
 		}else if (numero<1000) {

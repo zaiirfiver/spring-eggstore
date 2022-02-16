@@ -1,6 +1,8 @@
 package com.zmpa.eggstore.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 //import java.util.function.Predicate;
@@ -20,6 +22,8 @@ import com.zmpa.eggstore.model.DetalleOrden;
 import com.zmpa.eggstore.model.Orden;
 import com.zmpa.eggstore.model.Producto;
 import com.zmpa.eggstore.model.Usuario;
+import com.zmpa.eggstore.service.IDetalleOrdenService;
+import com.zmpa.eggstore.service.IOrdenService;
 import com.zmpa.eggstore.service.IUsuarioService;
 import com.zmpa.eggstore.service.ProductoService;
 
@@ -34,6 +38,13 @@ public class HomeController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;					//Obtener el usuario para mandarlo al frontend
+	
+	@Autowired
+	private IOrdenService ordenService;
+	
+	@Autowired
+	private IDetalleOrdenService detalleOrdenService;
+	
 	
 	List<DetalleOrden> detalles= new ArrayList<DetalleOrden>();			//Almacena los detalles de la orden
 	
@@ -139,5 +150,30 @@ public class HomeController {
 		model.addAttribute("usuario", usuario);
 		
 		return "usuario/resumenorden";
+	}
+	
+	@GetMapping("/saveOrder")
+	public String saveOrder() {
+		Date fechaCreacion = new Date();
+		orden.setFechaCreacion(fechaCreacion);
+		orden.setNumero(ordenService.generarNumeroOrden());
+		
+		//usuario 
+		Usuario usuario = usuarioService.findById(1).get();
+		
+		orden.setUsuario(usuario);
+		ordenService.save(orden);
+		
+		//guardar detalles
+		for (DetalleOrden dt:detalles) {
+			dt.setOrden(orden);
+			detalleOrdenService.save(dt);
+		}
+		
+		//limpiar lista de orden
+		orden = new Orden();
+		detalles.clear();
+		
+		return "redirect:/";
 	}
 }

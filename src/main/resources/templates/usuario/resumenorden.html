@@ -31,7 +31,7 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">
-        Spring eCommerce <small>Resumen de la orden</small>
+        Egg Store <small>Resumen de la orden</small>
       </h1>
 
       <ol class="breadcrumb">
@@ -86,7 +86,7 @@
 
           <ul class="list-group">
             <li class="list-group-item"><h5 th:text=" 'Total: '+ ${orden.total} "></h5></li>
-            <a href="#" class="btn btn-dark">Generar</a>
+            <a th:href="@{saveOrder}" class="btn btn-dark">Generar</a>
           </ul>
         </div>
       </div>
