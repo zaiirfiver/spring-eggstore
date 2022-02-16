@@ -3,7 +3,7 @@ package com.zmpa.eggstore.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
+//import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,5 +122,10 @@ public class HomeController {
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
 		return "/usuario/carrito";
+	}
+	
+	@GetMapping("/order")
+	public String order() {
+		return "usuario/resumenorden";
 	}
 }
