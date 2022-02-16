@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.zmpa.eggstore.model.DetalleOrden;
 import com.zmpa.eggstore.model.Orden;
 import com.zmpa.eggstore.model.Producto;
+import com.zmpa.eggstore.model.Usuario;
+import com.zmpa.eggstore.service.IUsuarioService;
 import com.zmpa.eggstore.service.ProductoService;
 
 @Controller
@@ -29,6 +31,9 @@ public class HomeController {
 	
 	@Autowired
 	private ProductoService productoService;				//permite obtener todos los productos
+	
+	@Autowired
+	private IUsuarioService usuarioService;					//Obtener el usuario para mandarlo al frontend
 	
 	List<DetalleOrden> detalles= new ArrayList<DetalleOrden>();			//Almacena los detalles de la orden
 	
@@ -125,7 +130,14 @@ public class HomeController {
 	}
 	
 	@GetMapping("/order")
-	public String order() {
+	public String order(Model model) {
+		
+		Usuario usuario = usuarioService.findById(1).get();
+		
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
+		
 		return "usuario/resumenorden";
 	}
 }

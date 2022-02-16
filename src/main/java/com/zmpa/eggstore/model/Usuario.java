@@ -18,7 +18,7 @@ public class Usuario {
 	private String nombre;
 	private String username;
 	private String mail;
-	private String dirección;
+	private String direccion;
 	private String telefono;
 	private String tipo;
 	private String password;
@@ -34,14 +34,14 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(Integer id, String nombre, String username, String mail, String dirección, String telefono,
+	public Usuario(Integer id, String nombre, String username, String mail, String direccion, String telefono,
 			String tipo, String password) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.username = username;
 		this.mail = mail;
-		this.dirección = dirección;
+		this.direccion = direccion;
 		this.telefono = telefono;
 		this.tipo = tipo;
 		this.password = password;
@@ -70,17 +70,18 @@ public class Usuario {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	public String getDirección() {
-		return dirección;
-	}
-	public void setDirección(String dirección) {
-		this.dirección = dirección;
-	}
 	public String getTelefono() {
 		return telefono;
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 	public String getTipo() {
 		return tipo;
@@ -106,9 +107,11 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", username=" + username + ", mail=" + mail + ", dirección="
-				+ dirección + ", telefono=" + telefono + ", tipo=" + tipo + ", password=" + password + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", username=" + username + ", mail=" + mail + ", direccion="
+				+ direccion + ", telefono=" + telefono + ", tipo=" + tipo + ", password=" + password + "]";
 	}
+
+	
 	
 	
 	
