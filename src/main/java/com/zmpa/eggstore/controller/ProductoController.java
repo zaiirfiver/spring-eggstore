@@ -3,6 +3,7 @@ package com.zmpa.eggstore.controller;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,9 @@ public class ProductoController {
 	private ProductoService productoService;
 	
 	@GetMapping("")
-	public String show() {
-		return "productos/show";
+	public String show(Model model) {									//lleva la información del backend al frontend
+		model.addAttribute("productos", productoService.findAll());		//recibe la vista de productoService
+		return "productos/show";										//muestra la vista de show.html
 	}
 	
 	@GetMapping("/create")
