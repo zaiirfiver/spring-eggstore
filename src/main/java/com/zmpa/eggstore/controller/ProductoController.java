@@ -1,10 +1,13 @@
 package com.zmpa.eggstore.controller;
 
+import java.util.Optional;
+
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,9 +40,25 @@ public class ProductoController {
 		LOGGER.info("Este es el objeto producto {}",producto);
 		Usuario u= new Usuario(1, "", "", "", "", "", "", "");
 		producto.setUsuario(u);
-		
 		productoService.save(producto);
-		return "redirect:/productos";					//redirije a la vista show.html
+		return "redirect:/productos";									//redirije a la vista show.html
 	}
-
+	
+	@GetMapping("/edit/{id}")											//direcciona a edit.html
+	public String edit(@PathVariable Integer id, Model model){			//busca el registro del id mediante el mapeo 
+		Producto producto = new Producto();
+		Optional<Producto> optionalProducto=productoService.get(id);
+		producto= optionalProducto.get();
+		
+		LOGGER.info("Producto buscado: {}", producto);
+		model.addAttribute("producto", producto);
+		
+		return "productos/edit";
+	}
+	
+	@PostMapping("/update")
+	public String update(Producto producto) {
+		productoService.update(producto);
+		return "redirect:/productos";	
+	}
 }
