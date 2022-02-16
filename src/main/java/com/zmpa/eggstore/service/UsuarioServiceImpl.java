@@ -19,6 +19,11 @@ public class UsuarioServiceImpl implements IUsuarioService{
 		return usuarioDao.findById(id);
 	}
 	
+	@Override
+	public Usuario save(Usuario usuario) {
+		return usuarioDao.save(usuario);
+	}
+	
 	
 
 }
