@@ -1,6 +1,19 @@
 package com.zmpa.eggstore.model;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity														//
+@Table(name = "usuarios")									//Indica que es una tabla
 public class Usuario {
+	@Id														//Autoincrementa los datos ingresados
+	@GeneratedValue(strategy = GenerationType.IDENTITY)		//Hace que el campo sea autoincrementable
 	private Integer id;
 	private String nombre;
 	private String username;
@@ -9,6 +22,13 @@ public class Usuario {
 	private String telefono;
 	private String tipo;
 	private String password;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Producto> productos;						//Obtener la lista de productos
+	
+	@OneToMany(mappedBy = "usuario")						//Obtener la lista de ordenes
+	private List<Orden> ordenes;
+	
 	
 	public Usuario() {
 		
@@ -74,5 +94,22 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", username=" + username + ", mail=" + mail + ", dirección="
+				+ dirección + ", telefono=" + telefono + ", tipo=" + tipo + ", password=" + password + "]";
+	}
+	
+	
 	
 }
